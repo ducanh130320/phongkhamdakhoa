@@ -29,13 +29,7 @@ jobs:
       - name: Disable Jekyll
         run: touch out/.nojekyll
 
-      # ✅ FIX LỖI AUTHOR
-      - name: Setup Git
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-
       - name: Deploy to gh-pages
         run: |
           npm install gh-pages --save-dev
-          npx gh-pages -d out
+          npx gh-pages -d out -u "github-actions <github-actions@github.com>" -r https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
