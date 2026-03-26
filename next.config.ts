@@ -2,6 +2,7 @@
 const nextConfig = {
   output: 'export',
   basePath: '/phongkhamdakhoa',
+  assetPrefix: '/phongkhamdakhoa/',   // 
   images: {
     unoptimized: true,
   },
