@@ -26,9 +26,14 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      # 🔥 QUAN TRỌNG: thêm dòng này
       - name: Disable Jekyll
         run: touch out/.nojekyll
+
+      # ✅ FIX LỖI AUTHOR
+      - name: Setup Git
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
 
       - name: Deploy to gh-pages
         run: |
