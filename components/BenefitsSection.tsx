@@ -50,7 +50,7 @@ export default function BenefitsSection() {
                 ease: "easeInOut",
                 delay: idx * 0.15,
               }}
-              style={{ willChange: "transform, opacity" }}
+              style={{ willChange: "transform, opacity" }} //comment
             >
               <div
                 className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 flex gap-4 items-start hover:bg-white/20 transition-all shadow-lg"
