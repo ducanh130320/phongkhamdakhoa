@@ -63,13 +63,6 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <a
-            href={`tel:${hotline}`}
-            aria-label={`Gọi hotline ${hotline}`}
-            className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#f24b54] bg-white text-[#f24b54] shadow-md transition-colors hover:bg-[#f24b54] hover:text-white"
-          >
-            <PhoneCall className="h-5 w-5" />
-          </a>
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-brand-red hover:bg-red-600 text-white font-bold py-2.5 px-4 md:px-6 rounded-full transition-colors shadow-md animate-blink uppercase text-sm whitespace-nowrap"
