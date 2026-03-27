@@ -21,7 +21,7 @@ export default function WhoSection() {
       {/* Decorative background number 2 */}
       <div className="container mx-auto px-4 max-w-6xl relative z-10 flex flex-col md:flex-row items-center gap-12">
         {/* Accordion Left Side */}
-        <div className="w-full md:w-1/2">
+        <div className="order-2 w-full md:order-1 md:w-1/2">
           <h2 className="text-2xl font-bold text-brand-dark mb-2 uppercase tracking-wide">
             Những dấu hiệu cảnh báo bạn cần khám ngay
           </h2>
@@ -72,7 +72,7 @@ export default function WhoSection() {
         </div>
 
         {/* Right Side Image/Graphic */}
-        <div className="w-full md:w-1/2 flex flex-col justify-center relative">
+        <div className="order-1 w-full md:order-2 md:w-1/2 flex flex-col justify-center relative">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export default function WhoSection() {
             }}
             style={{ willChange: "transform, opacity" }}
           >
-            <div className="relative w-80 h-80 mx-auto md:ml-0 bg-white rounded-full shadow-2xl p-2 z-10 hidden sm:block">
+            <div className="relative mx-auto h-64 w-64 bg-white rounded-full shadow-2xl p-2 z-10 sm:h-80 sm:w-80 md:ml-0">
               <div className="w-full h-full rounded-full bg-BrandLight overflow-hidden relative flex items-center justify-center border border-gray-200">
                 <Image src="/images/baoquydau.png" alt="Doctor" width={70} height={70} className="object-cover rounded-full w-full h-full" />
               </div>

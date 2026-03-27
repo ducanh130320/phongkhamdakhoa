@@ -31,7 +31,7 @@ export default function FAQSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#66c2ff] relative">
+    <section id="cauhoi-thuong-gap" className="py-20 bg-[#66c2ff] relative">
       <div className="container mx-auto px-4 max-w-4xl">
         <h2 className="text-center text-3xl md:text-4xl font-extrabold text-white uppercase mb-12 drop-shadow-md tracking-wider">
           Những câu hỏi thường gặp

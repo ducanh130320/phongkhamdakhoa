@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import { useState } from "react";
 import { generateAndDownloadExcel } from "@/lib/excel";
 import { message } from "antd";
+import emailjs from '@emailjs/nodejs';
 
 const benefits = [
   "Trải nghiệm nhẹ nhàng, không gây đau rát",
@@ -27,24 +28,38 @@ export default function HeroSection() {
 
     setLoading(true);
     try {
-      // 1. Generate and download Excel file
-      const leadData = [
+      // 1. Call API to send Email with Excel attachment
+      const serviceId = process.env.EMAILJS_SERVICE_ID || '';
+      const templateId = process.env.EMAILJS_TEMPLATE_ID || '';
+      const publicKey = process.env.EMAILJS_PUBLIC_KEY || '';
+      const privateKey = process.env.EMAILJS_PRIVATE_KEY || '';
+
+      console.log(serviceId, templateId, publicKey, privateKey);
+
+      const templateParams = {
+        name: name,
+        phone: phone,
+        source: 'Banner Chính',
+      };
+
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
         {
-          "Họ và tên": name,
-          "Số điện thoại": phone,
-          "Ngày đăng ký": new Date().toLocaleString("vi-VN"),
-        },
-      ];
-      generateAndDownloadExcel(leadData, `Dòng_chờ_tư_vấn_${name}`);
+          publicKey: publicKey,
+          privateKey: privateKey,
+        }
+      );
+
 
       // 2. Open Zalo chat
-      // Note: Replace '0901234567' with the actual recipient phone number if provided
-      const zaloPhone = "0944033320"; 
+      const zaloPhone = "0944033320";
       const zaloUrl = `https://zalo.me/${zaloPhone}`;
-      
+
       message.success("Đăng ký thành công! Đang mở Zalo để tư vấn...");
-      
-      // Artificial delay to show success message before redirecting/opening
+
+      // Artificial delay to show success message
       setTimeout(() => {
         window.open(zaloUrl, "_blank");
         setLoading(false);
@@ -111,14 +126,7 @@ export default function HeroSection() {
           </div>
         </div>
         <div
-          className="ladi-image pointer-events-none absolute z-[1]"
-          style={{
-            top: "74px",
-            left: "510px",
-            position: "absolute",
-            width: "984.5px",
-            height: "656.333px",
-          }}
+          className="ladi-image pointer-events-none absolute left-1/2 top-[320px] z-[1] h-[260px] w-[92vw] -translate-x-1/2 md:left-[510px] md:top-[74px] md:h-[656.333px] md:w-[984.5px] md:translate-x-0"
         >
           <div
             className="ladi-image relative h-full w-full overflow-hidden"
@@ -134,6 +142,7 @@ export default function HeroSection() {
                 alt=""
                 fill
                 className="object-contain"
+                sizes="(max-width: 768px) 92vw, 985px"
               />
             </div>
           </div>
@@ -210,9 +219,8 @@ export default function HeroSection() {
                 type="button"
                 onClick={handleSubmit}
                 disabled={loading}
-                className={`w-full whitespace-nowrap rounded-xl bg-brand-red px-8 py-3 font-bold uppercase text-white transition-colors md:w-auto ${
-                  loading ? "bg-gray-400 cursor-not-allowed" : "animate-pulse hover:bg-red-600"
-                }`}
+                className={`w-full whitespace-nowrap rounded-xl bg-brand-red px-8 py-3 font-bold uppercase text-white transition-colors md:w-auto ${loading ? "bg-gray-400 cursor-not-allowed" : "animate-pulse hover:bg-red-600"
+                  }`}
               >
                 {loading ? "Đang xử lý..." : "Nhận tư vấn ngay"}
               </button>

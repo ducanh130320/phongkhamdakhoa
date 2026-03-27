@@ -8,8 +8,7 @@ import { SERVICES } from "../lib/services";
 export default function WhySection() {
   return (
     <section
-      id="dich-vu"
-      className="py-20 bg-white relative bg-no-repeat scroll-mt-24"
+      id="dich-vu" className="py-20 bg-white relative bg-no-repeat scroll-mt-24"
       style={{ backgroundImage: "url(/images/why.jpg)" }}
     >
       <div className="container mx-auto px-4 max-w-6xl">

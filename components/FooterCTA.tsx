@@ -19,16 +19,18 @@ export default function FooterCTA() {
 
     setLoading(true);
     try {
-      // 1. Generate and download Excel file
-      const leadData = [
-        {
-          "Họ và tên": name,
-          "Số điện thoại": phone,
-          "Ngày đăng ký": new Date().toLocaleString("vi-VN"),
-          "Nguồn": "Footer CTA"
+      // 1. Call API to send Email with Excel attachment
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      ];
-      generateAndDownloadExcel(leadData, `Dòng_chờ_tư_vấn_${name}_Footer`);
+        body: JSON.stringify({ name, phone, source: 'Footer CTA' }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
 
       // 2. Open Zalo chat
       const zaloPhone = "0944033320"; 

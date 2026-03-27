@@ -1,10 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { PhoneCall } from "lucide-react";
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const hotline = "0985912711";
+  useEffect(() => {
+    setIsModalOpen(true);
+  }, []);
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="container mx-auto px-4 h-20 flex items-center justify-between">
@@ -20,7 +25,7 @@ export default function Header() {
 
         <nav className="hidden md:flex items-center gap-8">
           <Link
-            href="/#ve-tam-tri"
+            href="/"
             className="text-gray-600 hover:text-brand-blue font-medium transition-colors"
           >
             Về TRUE HOPE
@@ -38,25 +43,40 @@ export default function Header() {
             Bác sĩ
           </Link>
           <Link
-            href="/#he-thong"
+            href="/#trang-thiet-bi"
             className="text-gray-600 hover:text-brand-blue font-medium transition-colors"
           >
-            Hệ thống cơ sở
+            Trang thiết bị
           </Link>
           <Link
-            href="/#lien-he"
+            href="/#loi-ich"
             className="text-gray-600 hover:text-brand-blue font-medium transition-colors"
           >
-            Liên hệ
+            Lợi ích
+          </Link>
+          <Link
+            href="/#cauhoi-thuong-gap"
+            className="text-gray-600 hover:text-brand-blue font-medium transition-colors"
+          >
+            Câu hỏi thường gặp
           </Link>
         </nav>
 
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-brand-red hover:bg-red-600 text-white font-bold py-2.5 px-5 rounded-full transition-colors shadow-md animate-blink uppercase text-sm whitespace-nowrap"
-        >
-          Đăng ký tư vấn ngay
-        </button>
+        <div className="flex items-center gap-2 md:gap-3">
+          <a
+            href={`tel:${hotline}`}
+            aria-label={`Gọi hotline ${hotline}`}
+            className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#f24b54] bg-white text-[#f24b54] shadow-md transition-colors hover:bg-[#f24b54] hover:text-white"
+          >
+            <PhoneCall className="h-5 w-5" />
+          </a>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-brand-red hover:bg-red-600 text-white font-bold py-2.5 px-4 md:px-6 rounded-full transition-colors shadow-md animate-blink uppercase text-sm whitespace-nowrap"
+          >
+            Nhận tư vấn ngay
+          </button>
+        </div>
 
         <button className="md:hidden text-gray-600">
           <svg
@@ -91,7 +111,7 @@ export default function Header() {
                 <button
                   aria-label="Close"
                   onClick={() => setIsModalOpen(false)}
-                  className="text-gray-500 hover:text-gray-700 "
+                  className="text-white/90 hover:text-white text-3xl leading-none font-bold cursor-pointer"
                 >
                   &times;
                 </button>

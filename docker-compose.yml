@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  frontend:
+    image: img_pkdk-fe:v1
+    container_name: ctn_pkdk-fe
+    ports:
+      - "8000:8000"
+    environment:
+      NODE_ENV: production
+    restart: always
