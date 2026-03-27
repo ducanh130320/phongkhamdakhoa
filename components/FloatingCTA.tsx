@@ -10,18 +10,36 @@ export default function FloatingCTA() {
   return (
     <>
       <div className="fixed inset-x-0 bottom-3 z-[60] px-3 pb-[max(env(safe-area-inset-bottom),0px)]">
-        <div className="mx-auto flex w-full max-w-md items-center gap-3 rounded-full bg-white/90 p-2 shadow-2xl ring-1 ring-black/5 backdrop-blur">
+        {/* Mobile: phone + button cạnh nhau, không chung một khối */}
+        <div className="mx-auto flex w-full max-w-md items-center gap-3 md:hidden">
           <a
             href={`tel:${hotline}`}
             aria-label={`Gọi hotline ${hotline}`}
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#f24b54] shadow-md ring-2 ring-[#f24b54] transition-colors hover:bg-[#f24b54] hover:text-white"
+            className="phone-zoom flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#f24b54] shadow-md ring-2 ring-[#f24b54] transition-colors hover:bg-[#f24b54] hover:text-white"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlSpace="preserve" preserveAspectRatio="none" width="100%" height="100%" className="fill-[#f24b54]" fill="#f24b54"><use xlinkHref="#shape_fHzhDCbWWw"></use></svg>
+            <PhoneCall className="h-6 w-6" />
           </a>
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex h-12 flex-1 items-center justify-center rounded-full bg-brand-red px-5 text-sm font-extrabold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-red-600"
+            className="flex h-12 flex-1 items-center justify-center rounded-full bg-brand-red px-5 text-sm font-extrabold uppercase tracking-wide text-white shadow-md transition-colors hover:bg-red-600 animate-blink hover:[animation-play-state:paused] focus-visible:[animation-play-state:paused] active:[animation-play-state:paused]"
+          >
+            Nhận tư vấn ngay
+          </button>
+        </div>
+
+        {/* Desktop: icon nằm góc trái, button tách riêng ở giữa */}
+        <a
+          href={`tel:${hotline}`}
+          aria-label={`Gọi hotline ${hotline}`}
+          className="phone-zoom fixed bottom-4 left-4 hidden h-14 w-14 items-center justify-center rounded-full bg-white text-[#f24b54] shadow-xl ring-2 ring-[#f24b54] transition-colors hover:bg-[#f24b54] hover:text-white md:flex"
+        >
+          <PhoneCall className="h-7 w-7" />
+        </a>
+        <div className="hidden md:flex md:justify-center">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex h-12 min-w-[320px] items-center justify-center rounded-full bg-brand-red px-8 text-sm font-extrabold uppercase tracking-wide text-white shadow-xl hover:bg-red-600 animate-blink hover:[animation-play-state:paused] focus-visible:[animation-play-state:paused] active:[animation-play-state:paused]"
           >
             Nhận tư vấn ngay
           </button>
@@ -81,6 +99,29 @@ export default function FloatingCTA() {
           </div>
         </div>
       )}
+      <style jsx global>{`
+        @keyframes phoneZoom {
+          0% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.12);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+
+        .phone-zoom {
+          animation: phoneZoom 1.2s ease-in-out infinite;
+        }
+
+        .phone-zoom:hover,
+        .phone-zoom:focus-visible,
+        .phone-zoom:active {
+          animation-play-state: paused;
+        }
+      `}</style>
     </>
   );
 }

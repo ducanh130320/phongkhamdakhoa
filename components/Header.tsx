@@ -65,9 +65,9 @@ export default function Header() {
         <div className="flex items-center gap-2 md:gap-3">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-brand-red hover:bg-red-600 text-white font-bold py-2.5 px-4 md:px-6 rounded-full transition-colors shadow-md animate-blink uppercase text-sm whitespace-nowrap"
+            className="bg-brand-red hover:bg-red-600 text-white font-bold py-2.5 px-4 md:px-6 rounded-full shadow-md animate-blink uppercase text-sm whitespace-nowrap"
           >
-            Nhận tư vấn ngay !
+            Nhận tư vấn ngay
           </button>
         </div>
         <button className="md:hidden text-gray-600">
