@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { PhoneCall } from "lucide-react";
+import BookingModal from "./BookingModal";
 
 export default function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,59 +87,10 @@ export default function Header() {
           </svg>
         </button>
 
-        {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
-            <div
-              className="w-full max-w-md rounded-xl bg-[#fdf6e7] p-6 shadow-2xl text-white"
-              style={{
-                backgroundImage:
-                  "linear-gradient(rgb(0, 83, 163), rgb(0, 191, 242))",
-              }}
-            >
-              <div className="flex items-start justify-between border-b border-[#e7d7b8] pb-3">
-                <h2 className="text-2xl font-extrabold text-white drop-shadow-lg">
-                  Phát hiện sớm, điều trị kịp thời
-                </h2>
-                <button
-                  aria-label="Close"
-                  onClick={() => setIsModalOpen(false)}
-                  className="text-white/90 hover:text-white text-3xl leading-none font-bold cursor-pointer"
-                >
-                  &times;
-                </button>
-              </div>
-              <p className="mt-3 text-sm font-semibold text-white drop-shadow-sm">
-                Đặt lịch nội soi tiêu hóa ngay hôm nay
-              </p>
-              <form className="mt-4 space-y-3">
-                <input
-                  type="text"
-                  placeholder="Họ và tên"
-                  className="w-full rounded-lg border border-gray-300 p-3 focus:border-brand-blue focus:outline-none"
-                />
-                <input
-                  type="tel"
-                  placeholder="Số điện thoại"
-                  className="w-full rounded-lg border border-gray-300 p-3 focus:border-brand-blue focus:outline-none"
-                />
-                <textarea
-                  placeholder="Để lại lời nhắn cho chúng tôi"
-                  rows={3}
-                  className="w-full rounded-lg border border-gray-300 p-3 focus:border-brand-blue focus:outline-none"
-                ></textarea>
-                <button
-                  type="button"
-                  onClick={() => {
-                    /* TODO: submit logic */
-                  }}
-                  className="w-full rounded-full bg-brand-red py-2.5 text-sm font-bold text-white hover:bg-red-600 animate-blink transition-colors"
-                >
-                  Nhận tư vấn từ bác sĩ
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
+        <BookingModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </header>
   );
