@@ -67,10 +67,9 @@ export default function Header() {
             onClick={() => setIsModalOpen(true)}
             className="bg-brand-red hover:bg-red-600 text-white font-bold py-2.5 px-4 md:px-6 rounded-full transition-colors shadow-md animate-blink uppercase text-sm whitespace-nowrap"
           >
-            Nhận tư vấn ngay
+            Nhận tư vấn ngay !
           </button>
         </div>
-
         <button className="md:hidden text-gray-600">
           <svg
             xmlns="http://www.w3.org/2000/svg"

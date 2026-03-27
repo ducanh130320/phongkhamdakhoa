@@ -63,7 +63,7 @@ jobs:
             docker load -i $DOCKER_TAR
             
             cd /projects/phongkhamdakhoa/
-            docker compose up -d --pull=never
+            docker run -dp 8000:8000 --name  ctn_pkdk-fe img_pkdk-fe:v1
             docker image prune -f
             docker builder prune -f
             EOF
