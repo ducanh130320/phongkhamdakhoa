@@ -12,6 +12,7 @@ export default function BenefitsSection() {
   ];
 
   return (
+    /**BenefitsSection */
     <section id="loi-ich" className="py-20 text-white relative" style={{ backgroundImage: 'url(/images/nen.png)' }}>
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <motion.div
@@ -33,7 +34,6 @@ export default function BenefitsSection() {
               Khám tại True Hope
             </h3>
           </div>
-
         </motion.div>
 
 
