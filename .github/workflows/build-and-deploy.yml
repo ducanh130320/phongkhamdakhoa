@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DOCKER_CONTAINER: "ctn_easyvietnamese-fe"
-      DOCKER_IMAGE: "img_easyvietnamese-fe:v1"
+      DOCKER_CONTAINER: "ctn_pkdk"
+      DOCKER_IMAGE: "img_pkdk-fe:v1"
       DOCKERFILE_PATH: "Dockerfile"
-      DOCKER_TAR: "img_easyvietnamese-fe.tar"
+      DOCKER_TAR: "img_pkdk-fe.tar"
       
     steps:
       - name: Checkout
@@ -54,15 +54,15 @@ jobs:
           port: ${{ secrets.EC2_PORT }}
           script: |
             sudo -i <<'EOF'
-            DOCKER_TAR="/home/${{ secrets.EC2_USER }}/img_easyvietnamese-fe.tar"
-            DOCKER_CONTAINER="ctn_easyvietnamese-fe"
-            DOCKER_IMAGE="img_easyvietnamese-fe:v1"
+            DOCKER_TAR="/home/${{ secrets.EC2_USER }}/img_pkdk-fe.tar"
+            DOCKER_CONTAINER="ctn_pkdk-fe"
+            DOCKER_IMAGE="img_pkdk-fe:v1"
             
             docker rm -f $DOCKER_CONTAINER 2>/dev/null || true
             docker rmi -f $DOCKER_IMAGE 2>/dev/null || true
             docker load -i $DOCKER_TAR
             
-            cd /projects/Easyvietnamese-FE/
+            cd /projects/phongkhamdakhoa/
             docker compose up -d --pull=never
             docker image prune -f
             docker builder prune -f
