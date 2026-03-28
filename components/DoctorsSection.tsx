@@ -8,7 +8,7 @@ export default function DoctorsSection() {
       id="bac-si"
       className="relative overflow-hidden [overflow-x:clip]"
       style={{
-        backgroundImage: "url(/images/Backdrop_inal.jpg)",
+        backgroundImage: "url(/images/backdrop_final.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -26,7 +26,7 @@ export default function DoctorsSection() {
             className="mx-auto flex w-full justify-center"
           >
             <Image
-              src="/images/nguoi.png"
+              src="/images/doctor-4.png"
               alt="Doctors"
               width={400}
               height={400}
