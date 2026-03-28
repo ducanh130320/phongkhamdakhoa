@@ -40,6 +40,16 @@ export const metadata: Metadata = {
   ],
 };
 export default function Home() {
+
+  const fetchReviews = async () => {
+    const response = await fetch("https://serpapi.com/search.json?engine=google_maps_reviews&place_id=XXX&api_key=YOUR_KEY")
+    const data = await response.json()
+    console.log(data.reviews)
+  }
+
+  const a = fetchReviews()
+
+  console.log('a', a)
   return (
     <main className="flex min-h-screen flex-col bg-white">
       <HeroSection />

@@ -103,7 +103,7 @@ export default function WhoSection() {
           >
             <div className="relative mx-auto h-64 w-64 bg-white rounded-full shadow-2xl p-2 z-10 sm:h-80 sm:w-80 md:ml-0">
               <div className="w-full h-full rounded-full bg-BrandLight overflow-hidden relative flex items-center justify-center border border-gray-200">
-                <Image src="/images/baoquydau.png" alt="Doctor" width={70} height={70} className="object-cover rounded-full w-full h-full" />
+                <Image src="/images/may-phau-thuat.jpg" alt="Doctor" fill className="object-cover rounded-full w-full h-full" />
               </div>
 
               <div className="absolute -left-6 bottom-10 w-20 h-20 bg-white rounded-full shadow-lg border border-gray-100 flex items-center justify-center z-30">

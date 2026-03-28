@@ -16,7 +16,7 @@ export default function DoctorsSection() {
         position: "relative",
       }}
     >
-      <div className="container mx-auto flex min-h-[700px] max-w-6xl items-center justify-center px-4">
+      <div className="container mx-auto flex min-h-[700px] lg:min-h-[850px] max-w-6xl items-center justify-center px-4">
         <div className="w-full">
           <motion.div
             initial={{ opacity: 0, y: 24 }}

@@ -50,12 +50,10 @@ export default function FloatingCTA() {
           </button>
         </div>
       </div>
-
       <BookingModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-
       <style jsx global>{`
         @keyframes phoneZoom {
           0% {
