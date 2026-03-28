@@ -63,7 +63,7 @@ const REVIEWS: ReviewItem[] = [
     isNew: true,
     text:
       'Book lịch online nhanh, đến đúng giờ là vào khám. Mình chụp lại khu vực tiếp đón vì thấy gọn gàng, nhân viên nhiệt tình.',
-    imageSrc: '/images/review-google-maps-clinic.png',
+    imageSrc: '/images/unnamed.jpg',
     imageAlt: 'Không gian phòng khám TRUE HOPE',
     rating: 4.5,
   },
