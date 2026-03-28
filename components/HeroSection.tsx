@@ -6,7 +6,6 @@ import { Check } from "lucide-react";
 import { useState } from "react";
 import { generateAndDownloadExcel } from "@/lib/excel";
 import { message } from "antd";
-import emailjs from '@emailjs/nodejs';
 
 const benefits = [
   "Trải nghiệm nhẹ nhàng, không gây đau rát",
@@ -28,32 +27,17 @@ export default function HeroSection() {
 
     setLoading(true);
     try {
-      // 1. Call API to send Email with Excel attachment
-      const serviceId = process.env.EMAILJS_SERVICE_ID || '';
-      const templateId = process.env.EMAILJS_TEMPLATE_ID || '';
-      const publicKey = process.env.EMAILJS_PUBLIC_KEY || '';
-      const privateKey = process.env.EMAILJS_PRIVATE_KEY || '';
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, source: "Banner Chính" }),
+      });
 
-      console.log(serviceId, templateId, publicKey, privateKey);
+      if (!response.ok) {
+        throw new Error("Failed to send");
+      }
 
-      const templateParams = {
-        name: name,
-        phone: phone,
-        source: 'Banner Chính',
-      };
-
-      const result = await emailjs.send(
-        serviceId,
-        templateId,
-        templateParams,
-        {
-          publicKey: publicKey,
-          privateKey: privateKey,
-        }
-      );
-
-
-      // 2. Open Zalo chat
+      // Open Zalo chat
       const zaloPhone = "0944033320";
       const zaloUrl = `https://zalo.me/${zaloPhone}`;
 

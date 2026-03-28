@@ -1,5 +1,163 @@
 'use client';
-import { MapPin, Phone, Mail, Star } from "lucide-react";
+import Image from "next/image";
+import { MapPin, Phone, Mail, Star, MoreVertical } from "lucide-react";
+
+type ReviewItem = {
+  id: string;
+  initials: string;
+  avatarClass: string;
+  name: string;
+  meta: string;
+  timeAgo: string;
+  isNew?: boolean;
+  text: string;
+  imageSrc?: string;
+  imageAlt?: string;
+};
+
+const REVIEWS: ReviewItem[] = [
+  {
+    id: '1',
+    initials: 'GH',
+    avatarClass: 'from-emerald-400 to-teal-600',
+    name: 'Green! Hưng',
+    meta: '1 bài đánh giá · 1 ảnh',
+    timeAgo: '5 ngày trước',
+    isNew: true,
+    text:
+      'Lúc đầu cũng rén nhưng làm xong thấy nhẹ người. Bác sĩ mát tay, làm nhanh mà không đau như mình tưởng. Ưng nhất là khoản hậu phẫu, bác sĩ gọi điện hỏi han tình hình suốt nên cũng yên tâm.',
+    imageSrc: '/images/review-google-maps-clinic.png',
+    imageAlt: 'Ảnh khách hàng chụp tại phòng khám TRUE HOPE',
+  },
+  {
+    id: '2',
+    initials: 'MT',
+    avatarClass: 'from-sky-400 to-indigo-600',
+    name: 'Minh Tuấn',
+    meta: '3 bài đánh giá',
+    timeAgo: '2 tuần trước',
+    text:
+      'Phòng khám sạch sẽ, lễ tân hướng dẫn rõ ràng. Bác sĩ giải thích kỹ trước khi làm nên mình hiểu hết quy trình. Giá công khai, không phát sinh.',
+  },
+  {
+    id: '3',
+    initials: 'LA',
+    avatarClass: 'from-rose-400 to-pink-600',
+    name: 'Lan Anh',
+    meta: 'Local Guide · 12 bài đánh giá · 8 ảnh',
+    timeAgo: '1 tháng trước',
+    text:
+      'Đi cùng người nhà, thấy đội ngũ làm việc chuyên nghiệp. Chỗ để xe thuận tiện, không phải chờ lâu. Sau thăm khám được dặn dò cẩn thận.',
+  },
+  {
+    id: '4',
+    initials: 'HN',
+    avatarClass: 'from-amber-400 to-orange-600',
+    name: 'Hoàng Nam',
+    meta: '1 bài đánh giá · 1 ảnh',
+    timeAgo: '3 ngày trước',
+    isNew: true,
+    text:
+      'Book lịch online nhanh, đến đúng giờ là vào khám. Mình chụp lại khu vực tiếp đón vì thấy gọn gàng, nhân viên nhiệt tình.',
+    imageSrc: '/images/review-google-maps-clinic.png',
+    imageAlt: 'Không gian phòng khám TRUE HOPE',
+  },
+  {
+    id: '5',
+    initials: 'TM',
+    avatarClass: 'from-violet-400 to-purple-600',
+    name: 'Thảo My',
+    meta: '2 bài đánh giá · 3 ảnh',
+    timeAgo: '2 tháng trước',
+    text:
+      'Mình lo lắng nhiều nhưng được động viên từ lúc vào cửa. Thủ tục đơn giản, bảo mật tốt. Sẽ giới thiệu cho bạn bè nếu có nhu cầu.',
+  },
+  {
+    id: '6',
+    initials: 'ĐA',
+    avatarClass: 'from-cyan-400 to-blue-600',
+    name: 'Đức Anh',
+    meta: '5 bài đánh giá',
+    timeAgo: '6 ngày trước',
+    text:
+      'So với vài nơi mình từng hỏi thì ở đây tư vấn thẳng thắn, không ép dịch vụ. Sau liệu trình thấy ổn, tái khám đúng lịch.',
+  },
+];
+
+function ReviewCard({ review }: { review: ReviewItem }) {
+  const hasImage = Boolean(review.imageSrc);
+
+  return (
+    <article
+      className="rounded-2xl bg-white text-gray-900 shadow-xl border border-gray-200/90 overflow-hidden ring-1 ring-black/5"
+      aria-label={`Bài đánh giá từ ${review.name}`}
+    >
+      <div
+        className={
+          hasImage
+            ? 'flex flex-col md:flex-row md:items-stretch'
+            : 'flex flex-col'
+        }
+      >
+        <div className="p-4 sm:p-5 flex-1 min-w-0">
+          <header className="flex items-start gap-3">
+            <div
+              className={`h-10 w-10 rounded-full bg-gradient-to-br ${review.avatarClass} flex items-center justify-center text-white text-sm font-bold shrink-0 ring-2 ring-white shadow-sm`}
+              aria-hidden
+            >
+              {review.initials}
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="font-semibold text-gray-900 text-[15px] leading-tight tracking-tight">
+                {review.name}
+              </p>
+              <p className="text-xs text-gray-500 mt-1">{review.meta}</p>
+            </div>
+            <div
+              className="p-1.5 rounded-full text-gray-400 shrink-0 -mr-1"
+              aria-hidden
+            >
+              <MoreVertical className="w-5 h-5" strokeWidth={2} />
+            </div>
+          </header>
+
+          <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1.5">
+            <div className="flex gap-0.5" aria-hidden>
+              {[1, 2, 3, 4, 5].map((i) => (
+                <Star
+                  key={i}
+                  className="w-[18px] h-[18px] fill-amber-400 text-amber-400 shrink-0"
+                />
+              ))}
+            </div>
+            <span className="text-xs text-gray-500">{review.timeAgo}</span>
+            {review.isNew ? (
+              <span className="text-[10px] font-bold uppercase tracking-wide text-gray-800 border border-gray-300 rounded px-2 py-0.5 leading-none bg-gray-50">
+                MỚI
+              </span>
+            ) : null}
+          </div>
+
+          <p className="mt-3 text-[15px] text-gray-800 leading-relaxed">
+            {review.text}
+          </p>
+        </div>
+
+        {hasImage && review.imageSrc ? (
+          <div className="relative w-full md:w-[min(42%,280px)] md:shrink-0 aspect-[4/3] md:aspect-auto md:min-h-[200px] bg-gray-100 border-t md:border-t-0 md:border-l border-gray-100">
+            <Image
+              src={review.imageSrc}
+              alt={review.imageAlt ?? 'Ảnh đính kèm đánh giá'}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 280px"
+            />
+          </div>
+        ) : null}
+      </div>
+    </article>
+  );
+}
 
 export default function Footer() {
   return (
@@ -46,6 +204,13 @@ export default function Footer() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
+
+            <div className="flex flex-col gap-4">
+              {REVIEWS.map((review) => (
+                <ReviewCard key={review.id} review={review} />
+              ))}
+            </div>
+
             <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-5 text-sm leading-relaxed space-y-4">
               <h4 className="text-white font-bold text-base leading-snug">
                 Khám Nam Khoa TRUEHOPE - Khám &amp; Điều Trị Nam Khoa, Cắt Bao Quy Đầu

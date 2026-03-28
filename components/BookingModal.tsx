@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { Modal, Form, Input, message } from "antd";
-import emailjs from '@emailjs/nodejs';
-import * as XLSX from 'xlsx';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -17,47 +15,20 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const onFinish = async (values: any) => {
     setLoading(true);
     try {
-      const serviceId = process.env.EMAILJS_SERVICE_ID || '';
-      const templateId = process.env.EMAILJS_TEMPLATE_ID || '';
-      const publicKey = process.env.EMAILJS_PUBLIC_KEY || '';
-      const privateKey = process.env.EMAILJS_PRIVATE_KEY || '';
+      const res = await fetch("/api/send-mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: values.name,
+          phone: values.phone,
+          message: values.message || "",
+          source: "Modal Đặt Lịch",
+        }),
+      });
 
-      const leadData = [
-        {
-          "Họ và tên": values.name,
-          "Số điện thoại": values.phone,
-          "Ngày đăng ký": new Date().toLocaleString("vi-VN"),
-          "Nguồn": "Modal Đặt Lịch"
-        },
-      ];
-
-      const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.json_to_sheet(leadData);
-      XLSX.utils.book_append_sheet(wb, ws, 'Leads');
-
-      // Write to base64
-      const base64Content = XLSX.write(wb, { type: 'base64', bookType: 'xlsx' });
-
-      const templateParams = {
-        name: values.name,
-        phone: values.phone,
-        message: values.message || "Không có lời nhắn",
-        source: 'Modal Đặt Lịch',
-        excel_file: {
-          content: base64Content,
-          name: "leads.xlsx",
-        }
-      };
-
-      await emailjs.send(
-        serviceId,
-        templateId,
-        templateParams,
-        {
-          publicKey: publicKey,
-          privateKey: privateKey,
-        }
-      );
+      if (!res.ok) {
+        throw new Error("send-mail failed");
+      }
 
       message.success("Đăng ký thành công!");
       setLoading(false);
@@ -102,7 +73,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           </button>
         </div>
         <p className="mb-4 mt-3 text-sm font-semibold text-white drop-shadow-sm">
-          Đặt lịch nội soi tiêu hóa ngay hôm nay
+          Đặt lịch khám bệnh ngay hôm nay
         </p>
         <Form
           form={form}

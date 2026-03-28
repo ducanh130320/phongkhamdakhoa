@@ -130,9 +130,7 @@ if (!content.includes('const PremiumMarkdownBlock')) {
 const blockRegex = /<div className="mt-10 rounded-3xl border border-brand-blue\/20[^>]*>[\s\S]*?<ReactMarkdown[\s\S]*?>\s*\{service\.([a-zA-Z0-9_]+)\}\s*<\/ReactMarkdown>\s*<\/div>/g;
 
 content = content.replace(blockRegex, (match, propName) => {
-    console.log('Replacing property block:', propName);
     return '<PremiumMarkdownBlock content={service.' + propName + '} />';
 });
 
 fs.writeFileSync(filePath, content);
-console.log('Done refactoring ClientService.tsx');
