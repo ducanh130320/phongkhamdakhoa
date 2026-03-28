@@ -27,6 +27,12 @@ ENV NODE_ENV=production
 ENV EMAILJS_SERVICE_ID=service_3m0516o
 ENV EMAILJS_TEMPLATE_ID=template_iflzdou
 ENV EMAILJS_PUBLIC_KEY=CIYYNSRVLNEpT2Eoi
+ENV SMTP_HOST=smtp.gmail.com
+ENV SMTP_PORT=587
+ENV SMTP_USER=cskh.phongkhamnamkhoatruehope@gmail.com
+ENV SMTP_PASSWORD=gzemaczjkxqyrcig
+ENV MAIL_FROM=cskh.phongkhamnamkhoatruehope@gmail.com
+ENV MAIL_TO=cskh.phongkhamnamkhoatruehope@gmail.com
 RUN npm run build
 
 # ---------------------------

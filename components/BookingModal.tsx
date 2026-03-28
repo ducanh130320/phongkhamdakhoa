@@ -22,7 +22,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
           name: values.name,
           phone: values.phone,
           message: values.message || "",
-          source: "Modal Đặt Lịch",
+          source: "Đặt lịch khám bệnh",
         }),
       });
 

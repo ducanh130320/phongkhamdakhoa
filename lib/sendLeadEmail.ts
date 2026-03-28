@@ -61,28 +61,28 @@ export async function sendLeadEmail(input: LeadEmailInput): Promise<void> {
 
   const msgText =
     message && message.trim()
-      ? `Nguồn: ${source}\nHọ tên: ${name}\nSĐT: ${phone}\nLời nhắn: ${message}`
-      : `Nguồn: ${source}\nHọ tên: ${name}\nSĐT: ${phone}`;
+      ? `${source}\nHọ tên: ${name}\nSĐT: ${phone}\nLời nhắn: ${message}`
+      : `${source}\nHọ tên: ${name}\nSĐT: ${phone}`;
 
   const msgHtml =
     message && message.trim()
-      ? `<p><strong>Nguồn:</strong> ${escapeHtml(source)}</p>
+      ? `<p><strong>${escapeHtml(source)}</strong>
 <p><strong>Họ tên:</strong> ${escapeHtml(name)}</p>
 <p><strong>SĐT:</strong> ${escapeHtml(phone)}</p>
 <p><strong>Lời nhắn:</strong> ${escapeHtml(message)}</p>`
-      : `<p><strong>Nguồn:</strong> ${escapeHtml(source)}</p>
+      : `<p><strong>${escapeHtml(source)}</strong>
 <p><strong>Họ tên:</strong> ${escapeHtml(name)}</p>
 <p><strong>SĐT:</strong> ${escapeHtml(phone)}</p>`;
 
   await transporter.sendMail({
     from,
     to,
-    subject: `[${source}] Lead mới — ${name}`,
+    subject: `${source} - ${name}`,
     text: msgText,
     html: msgHtml,
     attachments: [
       {
-        filename: "lead.xlsx",
+        filename: "Đăng ký khám bệnh.xlsx",
         content: buffer,
         contentType:
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

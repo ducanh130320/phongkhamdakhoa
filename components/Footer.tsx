@@ -13,6 +13,7 @@ type ReviewItem = {
   text: string;
   imageSrc?: string;
   imageAlt?: string;
+  rating?: number;
 };
 
 const REVIEWS: ReviewItem[] = [
@@ -28,6 +29,7 @@ const REVIEWS: ReviewItem[] = [
       'Lúc đầu cũng rén nhưng làm xong thấy nhẹ người. Bác sĩ mát tay, làm nhanh mà không đau như mình tưởng. Ưng nhất là khoản hậu phẫu, bác sĩ gọi điện hỏi han tình hình suốt nên cũng yên tâm.',
     imageSrc: '/images/review-google-maps-clinic.png',
     imageAlt: 'Ảnh khách hàng chụp tại phòng khám TRUE HOPE',
+    rating: 5,
   },
   {
     id: '2',
@@ -38,6 +40,7 @@ const REVIEWS: ReviewItem[] = [
     timeAgo: '2 tuần trước',
     text:
       'Phòng khám sạch sẽ, lễ tân hướng dẫn rõ ràng. Bác sĩ giải thích kỹ trước khi làm nên mình hiểu hết quy trình. Giá công khai, không phát sinh.',
+    rating: 4,
   },
   {
     id: '3',
@@ -48,6 +51,7 @@ const REVIEWS: ReviewItem[] = [
     timeAgo: '1 tháng trước',
     text:
       'Đi cùng người nhà, thấy đội ngũ làm việc chuyên nghiệp. Chỗ để xe thuận tiện, không phải chờ lâu. Sau thăm khám được dặn dò cẩn thận.',
+    rating: 5,
   },
   {
     id: '4',
@@ -61,6 +65,7 @@ const REVIEWS: ReviewItem[] = [
       'Book lịch online nhanh, đến đúng giờ là vào khám. Mình chụp lại khu vực tiếp đón vì thấy gọn gàng, nhân viên nhiệt tình.',
     imageSrc: '/images/review-google-maps-clinic.png',
     imageAlt: 'Không gian phòng khám TRUE HOPE',
+    rating: 4.5,
   },
   {
     id: '5',
@@ -71,6 +76,7 @@ const REVIEWS: ReviewItem[] = [
     timeAgo: '2 tháng trước',
     text:
       'Mình lo lắng nhiều nhưng được động viên từ lúc vào cửa. Thủ tục đơn giản, bảo mật tốt. Sẽ giới thiệu cho bạn bè nếu có nhu cầu.',
+    rating: 4.5,
   },
   {
     id: '6',
@@ -81,6 +87,7 @@ const REVIEWS: ReviewItem[] = [
     timeAgo: '6 ngày trước',
     text:
       'So với vài nơi mình từng hỏi thì ở đây tư vấn thẳng thắn, không ép dịch vụ. Sau liệu trình thấy ổn, tái khám đúng lịch.',
+    rating: 5,
   },
 ];
 
@@ -123,7 +130,7 @@ function ReviewCard({ review }: { review: ReviewItem }) {
 
           <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1.5">
             <div className="flex gap-0.5" aria-hidden>
-              {[1, 2, 3, 4, 5].map((i) => (
+              {Array.from({ length: review?.rating ?? 0 }).map((_, i) => (
                 <Star
                   key={i}
                   className="w-[18px] h-[18px] fill-amber-400 text-amber-400 shrink-0"
